@@ -1,4 +1,5 @@
 # Universal Pattern Example
+How to use Universal Pattern package.
 
 ## Install
 ```bash
@@ -7,6 +8,7 @@ $ cd up-example
 $ npm install
 $ npm run watch
 ```
+Then, open your browser http://localhost:5000
 
 
 # Traditional RESTful API vs Universal Pattern
