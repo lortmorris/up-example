@@ -1,0 +1,16 @@
+{
+  "basePath": "/services",
+  "host": "localhost",
+  "port": 5000,
+  "name": "universal-pattern-example",
+  "version": "0.1",
+  "connection": {
+    "mongodb": {
+      "uri": "mongodb://127.0.0.1/uptest"
+    },
+    "redis": {
+      "host": "127.0.0.1",
+      "port": "6379"
+    }
+  }
+}

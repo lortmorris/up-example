@@ -1,0 +1,42 @@
+{
+  "name": "up-example",
+  "version": "1.0.0",
+  "description": "Universal Pattern Example",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node app.js",
+    "watch": "DEBUG=up* ./node_modules/.bin/nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lortmorris/up-example.git"
+  },
+  "keywords": [
+    "universal-pattern",
+    "agent"
+  ],
+  "author": "César Casas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lortmorris/up-example/issues"
+  },
+  "homepage": "https://github.com/lortmorris/up-example#readme",
+  "dependencies": {
+    "config": "^2.0.1",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "mongojs": "^2.6.0",
+    "universal-pattern": "^1.0.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "nodemon": "^1.18.3",
+    "supertest": "^3.1.0"
+  }
+}
