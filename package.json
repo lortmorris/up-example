@@ -26,6 +26,7 @@
     "config": "^2.0.1",
     "debug": "^3.1.0",
     "express": "^4.16.3",
+    "mocha": "^5.2.0",
     "mongojs": "^2.6.0",
     "universal-pattern": "^1.0.5"
   },
@@ -37,6 +38,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "nodemon": "^1.18.3",
-    "supertest": "^3.1.0"
+    "supertest": "^3.3.0"
   }
 }

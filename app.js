@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 const config = require('config');
-const up = require('universal-pattern');
+const up = require('../universal-pattern');
 
 
 const controllers = require('./controllers');
@@ -29,33 +29,42 @@ app.use((req, res, next) => {
 });
 
 
-up(app, {
-  swagger: {
-    baseDoc: config.get('basePath'),
-    host: `${config.get('host')}:${config.get('port')}`,
-    folder: path.join(process.cwd(), 'swagger'),
-    info: {
-      version: 10.0,
-      title: 'Universal Pattern Example',
-      termsOfService: 'www.domain.com/terms',
-      contact: {
-        email: 'cesarcasas@bsdsolutions.com.ar',
-      },
-      license: {
-        name: 'Apache License',
-        url: 'http://www.apache.org/licenses/LICENSE-2.0.html',
+const MyApp = (cb) => {
+  up(app, {
+    swagger: {
+      baseDoc: config.get('basePath'),
+      host: `${config.get('host')}:${config.get('port')}`,
+      folder: path.join(process.cwd(), 'swagger'),
+      info: {
+        version: 10.0,
+        title: 'Universal Pattern Example',
+        termsOfService: 'www.domain.com/terms',
+        contact: {
+          email: 'cesarcasas@bsdsolutions.com.ar',
+        },
+        license: {
+          name: 'Apache License',
+          url: 'http://www.apache.org/licenses/LICENSE-2.0.html',
+        },
       },
     },
-  },
-  compress: true,
-  cors: true,
-  database: {
-    uri: config.get('connection.mongodb.uri'),
-  },
-})
-  .then((upInstance) => {
-    addHooks(upInstance);
-    controllers(upInstance);
-    server.listen(port, () => console.info(`listen *:${port}`));
+    compress: true,
+    cors: true,
+    database: {
+      uri: config.get('connection.mongodb.uri'),
+    },
   })
-  .catch(err => console.error('Error initializing ', err));
+    .then((upInstance) => {
+      addHooks(upInstance);
+      controllers(upInstance);
+      cb(upInstance);
+    })
+    .catch(err => console.error('Error initializing ', err));
+};
+
+if (require.main === module) {
+  console.info('is main module');
+  MyApp(() => server.listen(port, () => console.info(`listen *:${port}`)));
+}
+
+module.exports = MyApp;

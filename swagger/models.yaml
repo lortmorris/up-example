@@ -1,9 +1,9 @@
 paths:
-  /carts:
+  /models:
     get:
       tags:
-        - carts
-      summary: reports list
+        - models
+      summary: models list
       x-swagger-router-controller: universal.search
       parameters:
         - $ref: '#/parameters/q'
@@ -16,10 +16,10 @@ paths:
         '200':
           description: reports
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/models'
     put:
       tags:
-        - carts
+        - models
       summary: insert new cart
       x-swagger-router-controller: universal.insert
       parameters:
@@ -27,16 +27,16 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/cartInput'
+            $ref: '#/definitions/modelInput'
       responses:
         '200':
           description: cart added
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/models'
 
     delete:
       tags:
-        - carts
+        - models
       summary: delete cart
       x-swagger-router-controller: universal.remove
       parameters:
@@ -48,11 +48,11 @@ paths:
         '200':
           description: deleted cart
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/models'
 
     patch:
       tags:
-        - carts
+        - models
       summary: for updated cart document
       x-swagger-router-controller: universal.update
       parameters:
@@ -60,50 +60,40 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/cartUpdate'
+            $ref: '#/definitions/modelUpdate'
       responses:
         '200':
           description: updated cart
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/models'
 
 definitions:
-  cartInput:
+  modelInput:
+    x-swagger-model-version: 3
     type: object
     properties:
       name:
         type: string
-      cost:
-        type: integer
-        format: float
-      color:
-        type: string
-        enum:
-          - black
-          - white
-          - blue
-          - green
         required: true
-      modelId:
-        type: string
-        format: mongoId
-        x-swagger-lookup:
-          collection: models
-          populate:
-            - _id
-            - name
+      level:
+        type: integer
+        required: true
+      props:
+        type: array
+        items:
+          type: string
+        minLength: 4
 
-  cartUpdate:
+
+  modelUpdate:
     type: object
     properties:
       _id:
         type: string
         format: mongoId
 
-  carts:
+  models:
     type: object
     properties:
       name:
-        type: string
-      comment:
         type: string
