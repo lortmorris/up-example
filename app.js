@@ -2,21 +2,17 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 const config = require('config');
-const up = require('../universal-pattern');
+const up = require('universal-pattern');
 
-
+const hooks = require('./hooks');
 const controllers = require('./controllers');
 
 const port = config.get('port');
 const app = express();
 const server = http.createServer(app);
 
-const addHooks = (upInstance) => {
-  upInstance.addHook('/carts', 'afterSearch', async (req, searchResults) => {
-    console.info(searchResults);
-    return Promise.resolve(searchResults);
-  });
-};
+
+app.use(express.static('assets'));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.get('Origin') || '*');
@@ -55,7 +51,7 @@ const MyApp = (cb) => {
     },
   })
     .then((upInstance) => {
-      addHooks(upInstance);
+      hooks(upInstance);
       controllers(upInstance);
       cb(upInstance);
     })

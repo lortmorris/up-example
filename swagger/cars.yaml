@@ -1,9 +1,9 @@
 paths:
-  /models:
+  /cars:
     get:
       tags:
-        - models
-      summary: models list
+        - cars
+      summary: cars list
       x-swagger-router-controller: universal.search
       parameters:
         - $ref: '#/parameters/q'
@@ -14,30 +14,30 @@ paths:
 
       responses:
         '200':
-          description: reports
+          description: cars list
           schema:
-            $ref: '#/definitions/models'
+            $ref: '#/definitions/car'
     put:
       tags:
-        - models
-      summary: insert new cart
+        - cars
+      summary: insert new car
       x-swagger-router-controller: universal.insert
       parameters:
         - name: modeldata
           in: body
           required: true
           schema:
-            $ref: '#/definitions/modelInput'
+            $ref: '#/definitions/carInput'
       responses:
         '200':
-          description: cart added
+          description: car added
           schema:
-            $ref: '#/definitions/models'
+            $ref: '#/definitions/car'
 
     delete:
       tags:
-        - models
-      summary: delete cart
+        - cars
+      summary: delete car
       x-swagger-router-controller: universal.remove
       parameters:
         - name: _id
@@ -46,54 +46,72 @@ paths:
           type: string
       responses:
         '200':
-          description: deleted cart
+          description: deleted car
           schema:
-            $ref: '#/definitions/models'
+            $ref: '#/definitions/car'
 
     patch:
       tags:
-        - models
-      summary: for updated cart document
+        - cars
+      summary: for updated car document
       x-swagger-router-controller: universal.update
       parameters:
         - name: modeldata
           in: body
           required: true
           schema:
-            $ref: '#/definitions/modelUpdate'
+            $ref: '#/definitions/carUpdate'
       responses:
         '200':
-          description: updated cart
+          description: updated car
           schema:
-            $ref: '#/definitions/models'
+            $ref: '#/definitions/car'
 
 definitions:
-  modelInput:
-    x-swagger-model-version: 3
+  carInput:
     type: object
     properties:
       name:
         type: string
+      color:
+        type: string
+        enum:
+          - black
+          - white
+          - blue
+          - green
+          - gray
+          - yellow
         required: true
-      level:
-        type: integer
-        required: true
-      props:
-        type: array
-        items:
-          type: string
-        minLength: 4
+      brandId:
+        type: string
+        format: mongoId
+        x-swagger-lookup:
+          collection: brands
+          populate:
+            - _id
+            - name
 
-
-  modelUpdate:
+  carUpdate:
     type: object
     properties:
       _id:
         type: string
         format: mongoId
 
-  models:
+  car:
     type: object
     properties:
+      _id:
+        type: string
       name:
         type: string
+      brandId:
+        type: string
+      brands:
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string

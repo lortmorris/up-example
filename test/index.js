@@ -8,7 +8,7 @@ const doSearch = path => `${apiPath}${path}?page=1&limit=30`;
 
 const runTest = up => () => {
   request(up.app)
-    .get(doSearch('/carts'))
+    .get(doSearch('/cars'))
     .expect('Content-Type', /json/)
     .expect(200)
     .end((err, res) => {

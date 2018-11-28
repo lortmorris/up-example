@@ -1,9 +1,9 @@
 paths:
-  /carts:
+  /users:
     get:
       tags:
-        - carts
-      summary: reports list
+        - users
+      summary: users list
       x-swagger-router-controller: universal.search
       parameters:
         - $ref: '#/parameters/q'
@@ -14,30 +14,30 @@ paths:
 
       responses:
         '200':
-          description: reports
+          description: cars list
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/user'
     put:
       tags:
-        - carts
-      summary: insert new cart
+        - users
+      summary: insert new user
       x-swagger-router-controller: universal.insert
       parameters:
         - name: modeldata
           in: body
           required: true
           schema:
-            $ref: '#/definitions/cartInput'
+            $ref: '#/definitions/userInput'
       responses:
         '200':
-          description: cart added
+          description: user added
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/user'
 
     delete:
       tags:
-        - carts
-      summary: delete cart
+        - users
+      summary: delete user
       x-swagger-router-controller: universal.remove
       parameters:
         - name: _id
@@ -46,65 +46,63 @@ paths:
           type: string
       responses:
         '200':
-          description: deleted cart
+          description: deleted user
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/user'
 
     patch:
       tags:
-        - carts
-      summary: for updated cart document
+        - users
+      summary: for updated car document
       x-swagger-router-controller: universal.update
       parameters:
         - name: modeldata
           in: body
           required: true
           schema:
-            $ref: '#/definitions/cartUpdate'
+            $ref: '#/definitions/userUpdate'
       responses:
         '200':
-          description: updated cart
+          description: updated user
           schema:
-            $ref: '#/definitions/carts'
+            $ref: '#/definitions/user'
 
 definitions:
-  cartInput:
+  userInput:
     type: object
     properties:
-      name:
+      firstname:
         type: string
-        x-swagger-regex: "[az]*"
-      cost:
-        type: integer
-        format: float
-      color:
-        type: string
-        enum:
-          - black
-          - white
-          - blue
-          - green
         required: true
-      modelId:
+      lastname:
         type: string
-        format: mongoId
-        x-swagger-lookup:
-          collection: models
-          populate:
-            - _id
-            - name
+        required: true
+      email:
+        type: string
+        format: email
+        required: true
 
-  cartUpdate:
+  userUpdate:
     type: object
     properties:
       _id:
         type: string
         format: mongoId
 
-  carts:
+  user:
     type: object
     properties:
-      name:
+      _id:
         type: string
-      comment:
+      firstname:
         type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      totalComments:
+        type: number
+      totalRatings:
+        type: number
+      totalPhotos:
+        type: number
