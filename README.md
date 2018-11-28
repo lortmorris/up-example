@@ -62,3 +62,12 @@ DEBUG=upexample* node mocks/cars.js
 ```bash
 DEBUG=upexample* node mocks/photos.js
 ```
+
+
+## Create Indexes
+
+Now, is time for create all indexes into MongoDB for search speed.
+
+```javascript
+db.getCollection('users').createIndex({ 'email' : 1 });
+```

@@ -11,7 +11,7 @@ const domains = ['gmail.com', 'yahoo.com', 'truenorth.co', 'somedomain.com'];
 
 const getRandom = data => data[Math.floor(Math.random() * data.length)];
 
-let x = 100000;
+let x = 10000;
 
 
 const getRandomUser = () => {
