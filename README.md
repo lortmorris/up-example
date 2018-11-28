@@ -3,7 +3,7 @@
 This is a easy example for build a Social Network using [Universal Pattern](https://www.npmjs.com/package/universal-pattern).
 
 Inline-style:
-![alt text](https://github.com/lortmorris/up-example/docs/wireframe.png "Writeframe and proposal")
+![alt text](https://github.com/lortmorris/up-example/blob/master/docs/wireframe.png "Writeframe and proposal")
 
 
 # Install
